@@ -1,7 +1,10 @@
 import { router } from "expo-router";
-import { StyleSheet, View, Text, ScrollView, Button, TextInput, Alert } from "react-native";
+import { useState } from "react";
+import { StyleSheet, View, Text, ScrollView, Button, TextInput, Alert, Switch, Image, Pressable, TouchableOpacity } from "react-native";
 
 export default function FormScreen() {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const returnAlert = () =>
     Alert.alert(
       "Voltar?",
@@ -13,16 +16,23 @@ export default function FormScreen() {
         },
         {
           text: "Sim",
-          onPress: () => router.push("/"), // aqui você define a rota de destino
+          onPress: () => router.push("/"),
         },
       ],
       { cancelable: true }
     );
 
+
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>FORM</Text>
+    
+        <View style={styles.strip}>
+            <Text style={styles.mainTitle}>Form Components</Text>
+        </View>
+
       <View style={styles.container}>
+        <View style={{padding:20}}><Text style={styles.title}>Text Input</Text></View>        
         <TextInput
           style={styles.input}
           placeholder="Entrada 1"
@@ -43,8 +53,34 @@ export default function FormScreen() {
           keyboardType="email-address"
           autoCapitalize="none"
         />
+        
+      </View>
 
+      <View style={styles.container}>        
+        <View style={{padding:20}}><Text style={styles.title}>Switch</Text></View>
+          <Switch
+          trackColor={{false: '#bc6c25', true: '#606c38'}}
+          thumbColor={isEnabled ? '#fff' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+      </View>
+      
+      
+      <View style={styles.container}>        
+        <View style={{padding:20}}><Text style={styles.title}>Button e Alert</Text></View>
         <Button onPress={returnAlert} title="Voltar" color="#606c38" />
+      </View>
+
+      <View style={{padding:50}}>
+        <TouchableOpacity
+        onPress={() => router.push('/')}
+        >
+        <Image
+        source={require('@/assets/images/return.png')}
+        /> 
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -52,11 +88,11 @@ export default function FormScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display:'flex',
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
-    padding: 50,
+    
   },
   input: {
     width: 350,
@@ -68,8 +104,23 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     backgroundColor: "#fefae0",
   },
+
+  mainTitle:{
+    fontSize:30,
+    color:'#fff',
+    textAlign:'center'
+  },
+
   title: {
-    fontSize: 40,
+    fontSize: 20,
     top: 10,
   },
+
+  strip:{
+    padding:20,
+    backgroundColor:"#283618",
+    width:'100%',
+
+  }
+
 });
