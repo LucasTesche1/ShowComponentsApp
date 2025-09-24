@@ -35,9 +35,13 @@ export default function ListScreen() {
   }
 
   return (
-    <><View style={styles.strip}>
-          <Text style={styles.mainTitle}>List Components</Text>
-      </View><FlatList
+    <>
+    
+        <View style={styles.strip}>
+            <Text style={styles.mainTitle}>List Components</Text>
+        </View>
+      
+      <FlatList
               data={flatData}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
