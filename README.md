@@ -21,9 +21,7 @@ Aplicativo desenvolvido para exemplificar o uso de componentes nativos do React 
 - **Image**: para melhor cache/performance usar libs nativas (ex.: react-native-fast-image), porém verificar compatibilidade com Expo.
 
 ## Como rodar
-1. `npm install` ou `yarn`
-2. `expo start`
+1. `npm install`
+2. `npx expo start`
 
-## Extras
-- ESLint + Prettier configurados
-- Sugestão: usar TypeScript para maior segurança de tipos.<img width="629" height="628" alt="image" src="https://github.com/user-attachments/assets/787c10a7-9321-4ec5-b5e1-65f14fa0fb02" />
+
