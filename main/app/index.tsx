@@ -11,31 +11,23 @@ export default function Navigation() {
   const [statusBarStyle, setStatusBarStyle] = useState<StatusBarStyle>(
     STYLES[0],
   );
-  const [statusBarTransition, setStatusBarTransition] = useState<
-    'fade' | 'slide' | 'none'
-  >(TRANSITIONS[0]);
+  const [bgColor, setBgColor] = useState("#fff");
+
 
   const changeStatusBarVisibility = () => setHidden(!hidden);
 
+
   const changeStatusBarStyle = () => {
     const styleId = STYLES.indexOf(statusBarStyle) + 1;
-    if (styleId === STYLES.length) {
-      setStatusBarStyle(STYLES[0]);
+    const newStyle = styleId === STYLES.length ? STYLES[0] : STYLES[styleId];
+    setStatusBarStyle(newStyle);
+
+    if (newStyle === "light-content") {
+      setBgColor("#283618"); // fundo escuro
     } else {
-      setStatusBarStyle(STYLES[styleId]);
+      setBgColor("#fefae0"); // fundo claro
     }
   };
-
-  const changeStatusBarTransition = () => {
-    const transition = TRANSITIONS.indexOf(statusBarTransition) + 1;
-    if (transition === TRANSITIONS.length) {
-      setStatusBarTransition(TRANSITIONS[0]);
-    } else {
-      setStatusBarTransition(TRANSITIONS[transition]);
-    }
-  };
-
-
 
 return (
   
@@ -43,9 +35,8 @@ return (
     
     <StatusBar
       animated={true}
-      backgroundColor="#606c38"
+      backgroundColor={bgColor}
       barStyle={statusBarStyle}
-      showHideTransition={statusBarTransition}
       hidden={hidden}
     />
     

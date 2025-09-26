@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, ActivityIndicator, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Image, ActivityIndicator, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 
@@ -14,8 +14,11 @@ export default function FormScreen() {
   return (
     <SafeAreaProvider>
 
+    <View style={styles.strip}>
+        <Text style={styles.mainTitle}>Image Components</Text>
+    </View>
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Imagem com placeholder</Text>
+      <Text style={styles.title}>Imagens com placeholder</Text>
 
       <View style={styles.imageContainer}>
         {loading && (
@@ -59,9 +62,17 @@ export default function FormScreen() {
         />
       </View>
 
-      <Text style={styles.lastSubtitle}>resizeMode: center</Text>
-      <View style={styles.lastSubtitle}></View>
- 
+      <Text style={styles.subtitle}>resizeMode: center</Text>
+      <View style={styles.subtitle}></View>
+      <View style={{padding:50}}>
+        <TouchableOpacity
+        onPress={() => router.push('/')}
+        >
+        <Image
+        source={require('@/assets/images/return.png')}
+        /> 
+        </TouchableOpacity>
+        </View>
     </ScrollView>
     </SafeAreaProvider>
   );
@@ -75,11 +86,7 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 28, fontWeight: "bold", marginVertical: 20 },
   subtitle: { fontSize: 18, marginTop: 10, marginBottom: 20 },
-  lastSubtitle:{
-    fontSize:18,
-    marginTop:10,
-    marginBottom:500
-  },
+
   imageContainer: {
     width: 350,
     height: 200,
@@ -90,4 +97,18 @@ const styles = StyleSheet.create({
   },
   image: { width: "100%", height: "100%", borderRadius: 10 },
   activity: { position: "absolute" },
+
+  
+  mainTitle:{
+    fontSize:30,
+    color:'#fff',
+    textAlign:'center'
+  },
+
+  strip:{
+    padding:20,
+    backgroundColor:"#283618",
+    width:'100%',
+
+  }
 });
