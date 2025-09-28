@@ -1,6 +1,7 @@
+import AntDesign from "@expo/vector-icons/AntDesign";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, ActivityIndicator, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, ActivityIndicator, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 
@@ -9,6 +10,25 @@ export default function FormScreen() {
 
   const imageUrl = "https://picsum.photos/400/300";
   const placeholder = "https://via.placeholder.com/400x300.png?text=Carregando...";
+
+  const returnAlertQuestion = () => {
+        Alert.alert(
+        "Curiosidades",
+        `IMAGE: Resposável por exibir imagens no app. Suporta imagens locais ou web.
+  
+SCROLLVIEW: Permite rolagem do conteúdo quando ele ultrapassa o tamanho da tela.
+  
+    `,
+          [
+            {
+    
+            },
+    
+          ],
+          { cancelable: true }
+        );
+      };
+
 
 
   return (
@@ -64,7 +84,7 @@ export default function FormScreen() {
 
       <Text style={styles.subtitle}>resizeMode: center</Text>
       <View style={styles.subtitle}></View>
-      <View style={{padding:50}}>
+      <View style={styles.returnContainer}>
         <TouchableOpacity
         onPress={() => router.push('/')}
         >
@@ -72,7 +92,12 @@ export default function FormScreen() {
         source={require('@/assets/images/return.png')}
         /> 
         </TouchableOpacity>
-        </View>
+
+        <TouchableOpacity
+        onPress={returnAlertQuestion}>
+        <AntDesign name="question-circle" size={35} color={'#606c38'}/>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
     </SafeAreaProvider>
   );
@@ -110,5 +135,14 @@ const styles = StyleSheet.create({
     backgroundColor:"#283618",
     width:'100%',
 
-  }
+  },
+
+ returnContainer:{
+    alignItems:'center',
+    justifyContent:'center',
+    padding:50,
+    flexDirection:'row',
+    gap:8
+
+  },
 });

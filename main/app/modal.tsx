@@ -1,9 +1,33 @@
+import AntDesign from '@expo/vector-icons/AntDesign';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
 const App = () => {
+  const returnAlertQuestion = () => {
+      Alert.alert(
+      "Curiosidades",
+      `SAFEAREAVIEW: Garante que o conteúdo não seja exibido em áreas "sensíveis" da tela (como notch ou barra de status). Muito usado em iOS.
+
+MODAL: Cria uma janela sobreposta a original, útil para diálogos e informações.
+
+VIEW: Serve como um contêiner para estruturar a interface.
+
+TEXT: Usado para exibir textos na tela.
+
+TOUCHABLE OPACITY: Um botão personalizável que altera a opacidade ao ser pressionado. Muito usado quando se deseja customizar botões além do padrão.
+  
+  `,
+        [
+          {
+  
+          },
+  
+        ],
+        { cancelable: true }
+      );
+    };
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <SafeAreaProvider>
@@ -37,13 +61,18 @@ const App = () => {
         </Pressable>
       </SafeAreaView>
 
-      <View style={styles.centeredView}>
+      <View style={styles.returnContainer}>
         <TouchableOpacity
-          onPress={() => router.push('/')}
+        onPress={() => router.push('/')}
         >
-          <Image
-            source={require('@/assets/images/return.png')}
-          />
+        <Image
+        source={require('@/assets/images/return.png')}
+        /> 
+        </TouchableOpacity>
+
+        <TouchableOpacity
+        onPress={returnAlertQuestion}>
+        <AntDesign name="question-circle" size={35} color={'#606c38'}/>
         </TouchableOpacity>
       </View>
     </SafeAreaProvider>
@@ -98,6 +127,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   mainTitle: { fontSize: 30, color: "#fff", textAlign: "center" },
+  
+  returnContainer:{
+    alignItems:'center',
+    justifyContent:'center',
+    padding:50,
+    flexDirection:'row',
+    gap:8
+
+  },
 });
 
 export default App;

@@ -1,6 +1,7 @@
-import { StyleSheet, View, TouchableOpacity, Text, ScrollView, StatusBar, StatusBarStyle, Button, Platform } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, ScrollView, StatusBar, StatusBarStyle, Alert, Image } from "react-native";
 import { router } from "expo-router";
 import { useState } from "react";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 const STYLES = ['default', 'dark-content', 'light-content'] as const;
 const TRANSITIONS = ['fade', 'slide', 'none'] as const;
@@ -29,10 +30,25 @@ export default function Navigation() {
     }
   };
 
+
+  const returnAlertQuestion = () => {
+      Alert.alert(
+      "Curiosidades",
+      `STATUS BAR: Controla a barra de status do dispositivo. Permite alterar estilo, cor e visibilidade.
+  `,
+        [
+          {
+  
+          },
+  
+        ],
+        { cancelable: true }
+      );
+    };
+
 return (
   
   <ScrollView contentContainerStyle={styles.container}>
-    
     <StatusBar
       animated={true}
       backgroundColor={bgColor}
@@ -66,6 +82,12 @@ return (
       </TouchableOpacity>      
     </View>
 
+    <View style={styles.returnContainer}>
+      <TouchableOpacity
+      onPress={returnAlertQuestion}>
+      <AntDesign name="question-circle" size={35} color={'#606c38'}/>
+      </TouchableOpacity>
+    </View>
   </ScrollView>
 );
 
@@ -122,5 +144,16 @@ const styles = StyleSheet.create({
     marginBottom: 8,
 
   },
+
+  returnContainer:{
+    alignItems:'center',
+    justifyContent:'center',
+    padding:50,
+    flexDirection:'row',
+    gap:8
+
+  },
+
+  
 
 });
